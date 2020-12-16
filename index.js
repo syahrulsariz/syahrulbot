@@ -462,7 +462,7 @@ var tampilTanggal = "TANGGAL: " + hari + ", " + tanggal + " " + bulan + " " + ta
 var tampilWaktu = "JAM: " + jam + ":" + menit + ":" + detik;
 conn.sendMessage(id, donate.donate(id, BotName, corohelp, tampilTanggal, tampilWaktu, instagramlu, whatsapplu, kapanbotaktif, grupch1, grupch2, grupch3) ,MessageType.text);
 }
-else if (text == '#DONASI'){
+else if (text == '#DONASIDONASI'){
   const corohelp = await get.get('https://covid19.mathdro.id/api/countries/id').json()
 var date = new Date();
 var tahun = date.getFullYear();
@@ -540,23 +540,46 @@ else if (text == '.foto'){
 conn.sendMessage(id, 'kirim .foto cewek/cowok\n\nContoh: .foto cewek' ,MessageType.text);
 }
    if (messageType == 'imageMessage')
+
    {
+	  let prefix= "#"
+
       let caption = imageMessage.caption.toLocaleLowerCase()
+
       const buffer = await conn.downloadMediaMessage(m) // to decrypt & use as a buffer
-      if (caption == '.sticker')
+
+      if (caption == prefix + 'sticker' || caption == prefix + 'stiker' || caption == prefix + 'Stiker' || caption == prefix + 
+'Sticker')
+
       {
+      	conn.sendMessage(id, '[ WAIT ] Sedang di proses⏳ silahkan tunggu sebentar', MessageType.text)
+
          const stiker = await conn.downloadAndSaveMediaMessage(m) // to decrypt & save to file
 
+
+
          const
+
          {
+
             exec
+
          } = require("child_process");
+
          exec('cwebp -q 50 ' + stiker + ' -o temp/' + jam + '.webp', (error, stdout, stderr) =>
+
          {
+
+         	
+
             let stik = fs.readFileSync('temp/' + jam + '.webp')
+
             conn.sendMessage(id, stik, MessageType.sticker)
+
          });
+
       }
+
    }
 
    if (messageType === MessageType.text)
