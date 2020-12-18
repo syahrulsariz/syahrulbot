@@ -208,9 +208,9 @@ if (text.includes("#infoig")){
 
 if (text.includes("#infogempa")){
   const teks = text.replace(/#infogempa /, "")
-  axios.get(`https://st4rz.herokuapp.com/api/infogempa`).then ((res) =>{
+  axios.get(`https://arugaz.herokuapp.com/api/infogempa`).then ((res) =>{
   conn.sendMessage(id, 'Sedang mencari... Silahkan tunggu!', MessageType.text)
-  let hasil = ` *INFO GEMPA* \n\ *Lokasi* : _${res.data.lokasi}_ \n *Kedalaman✍️* : _${res.data.kedalaman}_ \n *Koordinat✍️* : _${res.data.koordinat}_ \n *Magnitude✍️* : _${res.data.magnitude}_ \n *Waktu✍️* : _${res.data.waktu}_ `;
+  let hasil = `➸ Kedalaman : ${res.data.kedalaman}\n\n➸ koordinat : ${res.data.koordinat}\n\n➸lokasi : ${res.data.lokasi}\n\n➸magnitude : ${res.data.magnitude}\n\n➸potensi : ${res.data.potensi}\n\n➸waktu : ${res.data.waktu}`;
   conn.sendMessage(id, hasil, MessageType.text);
 })
 }
@@ -234,20 +234,11 @@ axios.get(`https://arugaz.herokuapp.com/api/wiki?q=${teks}`).then((res) => {
 }
 
 if (text.includes("#wikien")){
-const teks = text.replace(/#wiki /, "")
+const teks = text.replace(/#wikien /, "")
 axios.get(`https://arugaz.herokuapp.com/api/wikien?q=${teks}`).then((res) => {
-	conn.sendMessage(id, 'Sedang mencari... Slahkan tunggu!', MessageType.text)
-    let hasil = `Menurut Wikipedia :\n\n${res.data.result}`;
+	conn.sendMessage(id, 'Searching... Please waiting!', MessageType.text)
+    let hasil = `According to Wikipedia :\n\n${res.data.result}`;
     conn.sendMessage(id, hasil ,MessageType.text);
-})
-}
-
-if (text.includes(".sholat")){
-  const teks = text.replace(/.sholat /, "")
-  axios.get(`https://api.haipbis.xyz/jadwalsholat?daerah=${teks}`).then ((res) =>{
-  conn.sendMessage(id, '[WAIT] Searching...❗', MessageType.text)
-  let hasil = `Jadwal sholat di ${teks} hari ini adalah\n\nâš¡Imsyak : ${res.data.Imsyak}\nâš¡Subuh : ${res.data.Subuh} WIB\nâš¡Dzuhur : ${res.data.Dzuhur}WIB\nâš¡Ashar : ${res.data.Ashar} WIB\nâš¡Maghrib : ${res.data.Maghrib}\nâš¡Isya : ${res.data.Isya} WIB\nâš¡Tengah malam : ${res.data.Dhuha} WIB`;
-  conn.sendMessage(id, hasil, MessageType.text);
 })
 }
 else if (text == '#quran'){
@@ -256,14 +247,6 @@ axios.get('https://api.banghasan.com/quran/format/json/acak').then((res) => {
     const hs = res.data.acak.id.ayat;
     const ket = `${hs}`.replace(sr, '');
     let hasil = `[${ket}]   ${res.data.acak.ar.teks}\n\n${res.data.acak.id.teks}(QS.${res.data.surat.nama}, Ayat ${ket})`;
-    conn.sendMessage(id, hasil ,MessageType.text);
-})
-}
-if (text.includes(".namaninja")){
-const teks = text.replace(/.namaninja /, "")
-axios.get(`https://api.terhambar.com/ninja?nama=${teks}`).then((res) => {
-	conn.sendMessage(id, '[WAIT] Searching...❗', MessageType.text)
-    let hasil = `Nama Ninja kamu🙂:\n\n${res.message.data.result}`;
     conn.sendMessage(id, hasil ,MessageType.text);
 })
 }
